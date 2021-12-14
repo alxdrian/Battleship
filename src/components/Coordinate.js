@@ -15,6 +15,7 @@ const CoordinatePin = styled.div`
   border-radius: 50%;
   border: 5px solid #57A0E7;
   cursor: pointer;
+  color: white;
 
   &:hover {
     border-color: white;
@@ -24,7 +25,9 @@ const CoordinatePin = styled.div`
 export default function Coordinate({ x, y }) {
   return (
     <CoordinateBlock>
-      <CoordinatePin />
+      <CoordinatePin>
+        <span>{x}{y}</span>
+      </CoordinatePin>
     </CoordinateBlock>
   );
 }

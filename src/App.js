@@ -1,13 +1,12 @@
-import Coordinate from "./components/Coordinate";
+import { Board } from "./components/Board";
 
 function App() {
   return (
     <div>
       <h1>Battleship</h1>
-      <Coordinate />
-      <Coordinate />
-      <Coordinate />
-      <Coordinate />
+      <Board>
+      </Board>
+      
     </div>
   );
 }
