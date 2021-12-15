@@ -48,6 +48,7 @@ export default function Coordinate({ x, y, fleet }) {
 
   function handleClick() {
     setIsHit(true);
+    console.log(fleet);
   }
 
   return (
