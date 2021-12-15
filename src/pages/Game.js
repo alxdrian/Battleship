@@ -67,6 +67,10 @@ export default function Game () {
 
   return (
     <div>
+      <div>
+        <h2>Turns</h2>
+        <p>{localStorage.getItem("turns")}</p>
+      </div>
       {isPlaying ?
         <>
           <Board fleet={ships} columns={columns} rows={rows} />

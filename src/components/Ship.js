@@ -20,7 +20,7 @@ const ShipContainer = styled.div`
 `;
 
 const Armor = styled.div`
-  background-color: #E7E3E0;
+  background-color: #D8D8D8;
   border-radius: 10px;
   display: flex;
   justify-content: space-around;
@@ -36,12 +36,12 @@ const Armor = styled.div`
   `}
   flex-wrap: wrap;
   border: 1px solid black;
-  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 15px 0px #F47D11;
 
   div {
     width: 9px;
     height: 9px;
-    background-color: #8B8B8A;
+    background-color: #F5B82A;
     border: 1px solid black;
     border-radius: 50%;
     box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);

@@ -30,7 +30,7 @@ const WinPin = styled(CoordinatePin)`
   box-shadow: 0px 0px 15px 0px #F47D11;
 
   &:hover {
-    border-color: #F47D11;
+    border-color: #F5B82A;
 `;
 
 const LosePin = styled(CoordinatePin)`
