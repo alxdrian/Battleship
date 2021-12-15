@@ -9,11 +9,16 @@ const Table = styled.div`
   grid-row-gap: 0px;
 `;
 
-export function Board ({coordinates, children}) {
+export function Board ({coordinates, fleet}) {
   return (
     <Table>
       {coordinates.map(coordinate => 
-        <Coordinate key={`${coordinate[0]}${coordinate[1]}`} x={coordinate[0]} y={coordinate[1]} />
+        <Coordinate 
+          key={`${coordinate[0]}${coordinate[1]}`} 
+          x={coordinate[0]} 
+          y={coordinate[1]}
+          fleet={fleet} 
+        />
       )}
     </Table>
   )

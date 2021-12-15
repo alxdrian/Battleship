@@ -18,7 +18,7 @@ export default function Game () {
     }
   }
 
-  function createShipCoords(length) {
+  function createShip(length) {
     const ship = [];
     const vertical = Math.random() >= 0.5;
     const randomRow = rows[Math.floor(Math.random() * 10)];
@@ -26,22 +26,41 @@ export default function Game () {
     const randomInit = randomPosition(length);
     for (let i = 0; i < length; i++) {
       if (vertical) {
-        createShipCoords.push([rows[randomInit + i - 1], randomColumn]);
+        ship.push([rows[randomInit + i - 1], randomColumn]);
       } else {
         ship.push([randomRow, randomInit + i]);
       }
     }
     if (ship.some(coords => usedCords[coords])) {
-      return createShipCoords(length);
+      return createShip(length);
     } else {
       ship.forEach(coords => usedCords[coords] = true);
       fleet.push(ship);
     }
   }
 
+  function createFleet() {
+    createShip(4);
+    for (let i = 0; i < 2; i++) {
+      createShip(3);
+    }
+    for (let i = 0; i < 3; i++) {
+      createShip(2);
+    }
+    for (let i = 0; i < 4; i++) {
+      createShip(1);
+    }
+  }
+
+  function createGame() {
+    createFleet();
+    console.log(fleet);
+  }
+
   return (
     <div>
-      <Board coordinates={coords}></Board>
+      <div onClick={createGame}>Start</div>
+      <Board coordinates={coords} fleet={fleet}></Board>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useState } from "react";
 
 const CoordinateBlock = styled.div`
   width: 40px;
@@ -22,12 +23,36 @@ const CoordinatePin = styled.div`
   }
 `;
 
-export default function Coordinate({ x, y }) {
+const WinPin = styled(CoordinatePin)`
+  border: 5px solid #F5B82A;
+  background-color: #F47D11;
+  cursor: none;
+
+  &:hover {
+    border-color: #F47D11;
+`;
+
+const LosePin = styled(CoordinatePin)`
+  border: 5px solid #9B978F;
+  background-color: #A8A39F;
+  cursor: none;
+
+  &:hover {
+    border-color: #A8A39F;
+  }
+`;
+
+export default function Coordinate({ x, y, fleet }) {
+  const isShip = fleet.some(ship => ship.some(coord => coord[0] === x && coord[1] === y));
+  const [isHit, setIsHit] = useState(false);
+
+  function handleClick() {
+    setIsHit(true);
+  }
+
   return (
     <CoordinateBlock>
-      <CoordinatePin>
-        <span>{x}{y}</span>
-      </CoordinatePin>
+      {isHit ? (isShip ? <WinPin/> : <LosePin/>) : <CoordinatePin onClick={handleClick} />}
     </CoordinateBlock>
   );
 }
