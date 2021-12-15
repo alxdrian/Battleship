@@ -30,7 +30,6 @@ const RowTitle = styled(ColumnTitle)`
 
 export function Board ({fleet, columns, rows}) {
   const [moves, setMoves] = useState([]);
-  console.log(fleet);
 
   useEffect(() => {
   }, [moves]);
@@ -62,12 +61,14 @@ export function Board ({fleet, columns, rows}) {
       </Table>
       {fleet.map(ship => 
         <Ship
+          ship={ship}
           length={ship.length}
           orientation={
             ship.length === 1 || ship[0][1] === ship[1][1] ? "horizontal" : "vertical"
           }
           top={rows.findIndex(letter => letter === ship[0][0]) + 1}
           left={ship[0][1]}
+          moves={moves}
         />)}
     </BoardContainer>
   )

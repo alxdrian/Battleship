@@ -27,15 +27,17 @@ const WinPin = styled(CoordinatePin)`
   border: 5px solid #F5B82A;
   background-color: #F47D11;
   cursor: none;
+  box-shadow: 0px 0px 15px 0px #F47D11;
 
   &:hover {
     border-color: #F47D11;
 `;
 
 const LosePin = styled(CoordinatePin)`
-  border: 5px solid #9B978F;
-  background-color: #A8A39F;
+  border: 5px solid #A8A39F;
+  background-color: #636362;
   cursor: none;
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
 
   &:hover {
     border-color: #A8A39F;

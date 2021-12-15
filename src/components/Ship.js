@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
 
 const ShipContainer = styled.div`
   position: absolute;
@@ -35,7 +36,7 @@ const Armor = styled.div`
   `}
   flex-wrap: wrap;
   border: 1px solid black;
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
 
   div {
     width: 9px;
@@ -47,13 +48,28 @@ const Armor = styled.div`
   }
 `;
 
-export default function Ship ({length, orientation, top, left}) {
+export default function Ship ({ship, length, orientation, top, left, moves}) {
+  const [isFound, setIsFound] = useState(false);
+
+  useEffect(() => {
+    const verifyMoves = {};
+    moves.forEach(move => verifyMoves[move] = true);
+    if (ship.every(coord => verifyMoves[coord])) {
+      setIsFound(true);
+    }
+  }, [moves, ship]);
+    
+
   return (
-    <ShipContainer length={length} orientation={orientation} top={top} left={left}>
-      <Armor length={length} orientation={orientation}>
-        <div></div>
-        <div></div>
-      </Armor>
-    </ShipContainer>
+    <>
+      {isFound &&
+      <ShipContainer length={length} orientation={orientation} top={top} left={left}>
+        <Armor length={length} orientation={orientation}>
+          <div></div>
+          <div></div>
+        </Armor>
+      </ShipContainer>
+      }
+    </>
   );
 }
