@@ -42,18 +42,17 @@ const LosePin = styled(CoordinatePin)`
   }
 `;
 
-export default function Coordinate({ x, y, fleet }) {
-  const isShip = fleet.some(ship => ship.some(coord => coord[0] === x && coord[1] === y));
+export default function Coordinate({ x, y, saveCoord, ship}) {
   const [isHit, setIsHit] = useState(false);
 
   function handleClick() {
     setIsHit(true);
-    console.log(fleet);
+    saveCoord([x, y]);
   }
 
   return (
     <CoordinateBlock>
-      {isHit ? (isShip ? <WinPin/> : <LosePin/>) : <CoordinatePin onClick={handleClick} />}
+      {isHit ? (ship ? <WinPin/> : <LosePin/>) : <CoordinatePin onClick={handleClick} />}
     </CoordinateBlock>
   );
 }

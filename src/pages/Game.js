@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function Game () {
   const [isPlaying, setIsPlaying] = useState(false);
   const [ships, setShips] = useState([]);
-  const [usedCoordinates, setUsedCoordinates] = useState({});
+  let usedCoordinates = {};
 
   const columns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   const rows = ["A","B","C","D","E","F","G","H","I","J"];
@@ -15,29 +15,6 @@ export default function Game () {
       return randomPosition(length);
     } else { 
       return random;
-    }
-  }
-
-  function createShip(length) {
-    const ship = [];
-    const vertical = Math.random() >= 0.5;
-    const randomRow = rows[Math.floor(Math.random() * 10)];
-    const randomColumn = columns[Math.floor(Math.random() * 10)];
-    const randomInit = randomPosition(length);
-    for (let i = 0; i < length; i++) {
-      if (vertical) {
-        ship.push([rows[randomInit + i - 1], randomColumn]);
-      } else {
-        ship.push([randomRow, randomInit + i]);
-      }
-    }
-    if (ship.some(coords => usedCoordinates[coords])) {
-      return createShip(length);
-    } else {
-      ship.forEach(coords => 
-        setUsedCoordinates({ ...usedCoordinates, [coords]: true })
-      );
-      return ship;
     }
   }
 
@@ -56,15 +33,37 @@ export default function Game () {
     return fleet;
   }
 
+  function createShip(length) {
+    const ship = [];
+    const vertical = Math.random() >= 0.5;
+    const randomRow = rows[Math.floor(Math.random() * 10)];
+    const randomColumn = columns[Math.floor(Math.random() * 10)];
+    const randomInit = randomPosition(length);
+    for (let i = 0; i < length; i++) {
+      if (vertical) {
+        ship.push([rows[randomInit + i - 1], randomColumn]);
+      } else {
+        ship.push([randomRow, randomInit + i]);
+      }
+    }
+    if (ship.some(coord => usedCoordinates[coord])) {
+      return createShip(length);
+    } else {
+      ship.forEach(coord => usedCoordinates[coord] = true);
+      return ship;
+    }
+  }
+
   function createGame() {
     setIsPlaying(true);
     setShips(createFleet());
+    console.log(usedCoordinates);
   }
 
   function endGame() {
     setIsPlaying(false);
     setShips([]);
-    setUsedCoordinates({});
+    usedCoordinates = {};
   }
 
   return (
