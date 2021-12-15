@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Coordinate from "./Coordinate";
 
 const Table = styled.div`
   display: grid;
@@ -8,10 +9,12 @@ const Table = styled.div`
   grid-row-gap: 0px;
 `;
 
-export function Board ({children}) {
+export function Board ({coordinates, children}) {
   return (
     <Table>
-      {children}
+      {coordinates.map(coordinate => 
+        <Coordinate key={`${coordinate[0]}${coordinate[1]}`} x={coordinate[0]} y={coordinate[1]} />
+      )}
     </Table>
   )
 }
