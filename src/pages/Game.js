@@ -4,6 +4,7 @@ import { useState } from "react";
 export default function Game () {
   const [isPlaying, setIsPlaying] = useState(false);
   const [ships, setShips] = useState([]);
+  const [turns, setTurns] = useState(localStorage.getItem("turns"));
   let usedCoordinates = {};
 
   const columns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -63,17 +64,29 @@ export default function Game () {
     setIsPlaying(false);
     setShips([]);
     usedCoordinates = {};
+    setTurns(localStorage.getItem("turns"));
+  }
+
+  function playTurn() {
+    setTurns(turns - 1);
   }
 
   return (
     <div>
       <div>
         <h2>Turns</h2>
-        <p>{localStorage.getItem("turns")}</p>
+        <p>{turns}</p>
       </div>
       {isPlaying ?
         <>
-          <Board fleet={ships} columns={columns} rows={rows} />
+          <Board
+            fleet={ships}
+            columns={columns}
+            rows={rows}
+            turns={turns}
+            playTurn={playTurn}
+            endGame={endGame}
+          />
           <div onClick={endGame}>End</div>
         </> : 
         <div onClick={createGame}>Start</div>

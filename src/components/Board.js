@@ -28,14 +28,30 @@ const ColumnTitle = styled.div`
 const RowTitle = styled(ColumnTitle)`
 `;
 
-export function Board ({fleet, columns, rows}) {
+export function Board ({fleet, columns, rows, playTurn, turns, endGame}) {
   const [moves, setMoves] = useState([]);
+  const [shipsFound, setShipsFound] = useState([]);
 
   useEffect(() => {
-  }, [moves]);
+    if (shipsFound.length === fleet.length) {
+      console.log("You win!");
+      endGame();
+    }
+    if (turns === 0) {
+      console.log("You lose!");
+      endGame();
+    }
+  }, [moves, shipsFound]);
 
   function addMove(coord) {
     setMoves([...moves, coord]);
+    playTurn();
+  }
+
+  function saveShipFounded(ship) {
+    if (!shipsFound.includes(ship)) {
+      setShipsFound([...shipsFound, ship]);
+    }
   }
 
   return (
@@ -45,22 +61,23 @@ export function Board ({fleet, columns, rows}) {
         {columns.map(column => <ColumnTitle key={`column-${column}`}>{column}</ColumnTitle>)}
         {rows.map(row => 
           <>
-          <RowTitle key={`row-${row}`}>{row}</RowTitle>
-          {columns.map(column => 
-            <Coordinate
-              key={`coordinate-${row}-${column}`}
-              x={row}
-              y={column}
-              fleet={fleet}
-              saveCoord={addMove}
-              ship={fleet.find(ship => ship.some(coord => coord[0] === row && coord[1] === column))}
-            />
-          )}
+            <RowTitle key={`row-${row}`}>{row}</RowTitle>
+            {columns.map(column => 
+              <Coordinate
+                key={`coordinate-${row}-${column}`}
+                x={row}
+                y={column}
+                fleet={fleet}
+                saveCoord={addMove}
+                ship={fleet.find(ship => ship.some(coord => coord[0] === row && coord[1] === column))}
+              />
+            )}
           </>
         )}
       </Table>
       {fleet.map(ship => 
         <Ship
+          key={`ship-${[...ship]}`}
           ship={ship}
           length={ship.length}
           orientation={
@@ -69,6 +86,7 @@ export function Board ({fleet, columns, rows}) {
           top={rows.findIndex(letter => letter === ship[0][0]) + 1}
           left={ship[0][1]}
           moves={moves}
+          saveShip={saveShipFounded}
         />)}
     </BoardContainer>
   )

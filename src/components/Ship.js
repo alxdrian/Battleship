@@ -48,7 +48,7 @@ const Armor = styled.div`
   }
 `;
 
-export default function Ship ({ship, length, orientation, top, left, moves}) {
+export default function Ship ({ship, length, orientation, top, left, moves, saveShip}) {
   const [isFound, setIsFound] = useState(false);
 
   useEffect(() => {
@@ -56,6 +56,7 @@ export default function Ship ({ship, length, orientation, top, left, moves}) {
     moves.forEach(move => verifyMoves[move] = true);
     if (ship.every(coord => verifyMoves[coord])) {
       setIsFound(true);
+      saveShip(ship);
     }
   }, [moves, ship]);
     
