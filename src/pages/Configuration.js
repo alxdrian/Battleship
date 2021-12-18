@@ -26,7 +26,7 @@ export default function Configuration () {
       <div>
         <input type="number" value={turns} onChange={handleChangeTurns} placeholder='infinite'/>
       </div>
-      <Link to="/">Go to</Link>
+      <Link to="/battle">Go to</Link>
     </div>
   )
 }
