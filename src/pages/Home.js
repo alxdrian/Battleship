@@ -4,6 +4,7 @@ import { DefaultContainer, GameContainer, PageContainer } from "../components/UI
 import { Link } from "react-router-dom";
 import { ConfigIcon, PlayIcon, StatsIcon } from "../components/UI/Icon";
 import { ContentRegular, Title } from "../components/UI/Text";
+import { useEffect } from "react";
 
 const LinkContainer = styled(DefaultContainer)`
   width: 200px;
@@ -17,6 +18,17 @@ const LinkContainer = styled(DefaultContainer)`
 `;
 
 export default function Home () {
+  useEffect(() => {
+    const settings = localStorage.getItem("settings");
+    if (!settings) {
+      localStorage.setItem("settings", JSON.stringify({
+        turns: 100,
+        difficulty: "easy",
+        username: "",
+      }));
+    }
+  }, []);
+
   return (
     <PageContainer>
       <GameContainer>

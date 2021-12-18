@@ -1,15 +1,18 @@
 import { Board } from "../components/Board";
 import { useState } from "react";
+import { GameContainer, PageContainer } from "../components/UI/Container";
+import { ContentLarge, ContentRegular, ContentSmall, Title } from "../components/UI/Text";
 
 export default function Game () {
   const [isPlaying, setIsPlaying] = useState(false);
   const [ships, setShips] = useState([]);
-  const [turns, setTurns] = useState(localStorage.getItem("turns"));
+  const settings = JSON.parse(localStorage.getItem("settings"));
+  const [turns, setTurns] = useState(settings.turns || 100);
   let usedCoordinates = {};
 
   const columns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   const rows = ["A","B","C","D","E","F","G","H","I","J"];
-
+      
   function randomPosition(length) {
     const random = Math.floor(Math.random() * 11) - length + 1 ;
     if (random < 1) {
@@ -64,7 +67,7 @@ export default function Game () {
     setIsPlaying(false);
     setShips([]);
     usedCoordinates = {};
-    setTurns(localStorage.getItem("turns"));
+    setTurns(settings.turns);
   }
 
   function playTurn() {
@@ -72,25 +75,28 @@ export default function Game () {
   }
 
   return (
-    <div>
-      <div>
-        <h2>Turns</h2>
-        <p>{turns}</p>
-      </div>
-      {isPlaying ?
-        <>
-          <Board
-            fleet={ships}
-            columns={columns}
-            rows={rows}
-            turns={turns}
-            playTurn={playTurn}
-            endGame={endGame}
-          />
-          <div onClick={endGame}>End</div>
-        </> : 
-        <div onClick={createGame}>Start</div>
-      }
-    </div>
+    <PageContainer>
+      <GameContainer>
+        <Title>Battle !</Title>
+        <ContentRegular>Difficulty</ContentRegular>
+        <ContentSmall>{settings.difficulty}</ContentSmall>
+        <ContentRegular>Turns</ContentRegular>
+        <ContentSmall>{turns}</ContentSmall>
+        {isPlaying ?
+          <>
+            <Board
+              fleet={ships}
+              columns={columns}
+              rows={rows}
+              turns={turns}
+              playTurn={playTurn}
+              endGame={endGame}
+            />
+            <div onClick={endGame}>End</div>
+          </> : 
+          <div onClick={createGame}>Start</div>
+        }
+      </GameContainer>
+    </PageContainer>
   )
 }

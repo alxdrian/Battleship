@@ -2,9 +2,14 @@ import styled from "@emotion/styled";
 import Coordinate from "./Coordinate";
 import { useEffect, useState } from "react";
 import Ship from "./Ship";
+import { ContentXSmall } from "./UI/Text";
 
 const BoardContainer = styled.div`
   position: relative;
+  background-color: #50a9e7;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 15px 5px rgba(0, 0, 0, 0.1);
 `;
 
 const Table = styled.div`
@@ -13,16 +18,25 @@ const Table = styled.div`
   grid-template-rows: repeat(11, 40px);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+
+  @media (max-width: 540px) {
+    grid-template-columns: repeat(11, 25px);
+    grid-template-rows: repeat(11, 25px);
+  }
 `;
 
 const ColumnTitle = styled.div`
   width: 40px;
   height: 40px;
-  background-color: #1C69B4;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 540px) {
+    width: 25px;
+    height: 25px;
+  }
 `; 
 
 const RowTitle = styled(ColumnTitle)`
@@ -58,10 +72,10 @@ export function Board ({fleet, columns, rows, playTurn, turns, endGame}) {
     <BoardContainer>
       <Table>
         <div></div>
-        {columns.map(column => <ColumnTitle key={`column-${column}`}>{column}</ColumnTitle>)}
+        {columns.map(column => <ColumnTitle key={`column-${column}`}><ContentXSmall>{column}</ContentXSmall></ColumnTitle>)}
         {rows.map(row => 
           <>
-            <RowTitle key={`row-${row}`}>{row}</RowTitle>
+            <RowTitle key={`row-${row}`}><ContentXSmall>{row}</ContentXSmall></RowTitle>
             {columns.map(column => 
               <Coordinate
                 key={`coordinate-${row}-${column}`}

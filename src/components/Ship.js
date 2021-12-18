@@ -3,16 +3,32 @@ import { useEffect, useState } from "react";
 
 const ShipContainer = styled.div`
   position: absolute;
-  top: ${props => props.top * 40}px;
-  left: ${props => props.left * 40}px;  
+  top: ${props => props.top * 40 + 10}px;
+  left: ${props => props.left * 40 + 10}px;
+
+  @media (max-width: 540px) {
+    top: ${props => props.top * 25 + 10}px;
+    left: ${props => props.left * 25 + 10}px;
+  }
+
   ${props => props.orientation === "horizontal" ?
   `
     width: 40px;
-    height: ${props.length * 40}px;  
+    height: ${props.length * 40}px;
+
+    @media (max-width: 540px) {
+      width: 25px;
+      height: ${props.length * 25}px;
+    }
   ` : 
   `
     width: ${props.length * 40}px;
     height: 40px;
+
+    @media (max-width: 540px) {
+      height: 25px;
+      width: ${props.length * 25}px;
+    }
   `}
   display: flex;
   justify-content: center;
@@ -20,7 +36,7 @@ const ShipContainer = styled.div`
 `;
 
 const Armor = styled.div`
-  background-color: #D8D8D8;
+  background-color: #f0863d;
   border-radius: 10px;
   display: flex;
   justify-content: space-around;
@@ -28,23 +44,38 @@ const Armor = styled.div`
   ${props => props.orientation === "horizontal" ?
   `
     width: 20px;
-    height: ${props.length * 35}px;  
+    height: ${props.length * 35}px;
+
+    @media (max-width: 540px) {
+      width: 12px;
+      height: ${props.length * 22}px;
+    }
   ` : 
   `
     width: ${props.length * 35}px;
     height: 20px;
+
+    @media (max-width: 540px) {
+      height: 12px;
+      width: ${props.length * 22}px;
+    }
   `}
   flex-wrap: wrap;
-  border: 1px solid black;
+  border: 2px solid #aa2b46;
   box-shadow: 0px 0px 15px 0px #F47D11;
 
   div {
     width: 9px;
     height: 9px;
-    background-color: #F5B82A;
+    background-color: #aa2b46;
     border: 1px solid black;
     border-radius: 50%;
     box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
+
+    @media (max-width: 540px) {
+      width: 5px;
+      height: 5px;
+    }
   }
 `;
 
