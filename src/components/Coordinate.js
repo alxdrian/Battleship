@@ -65,12 +65,13 @@ const LosePin = styled(CoordinatePin)`
   }
 `;
 
-export default function Coordinate({ x, y, saveCoord, ship}) {
+export default function Coordinate({ x, y, saveCoord, ship, updateScore }) {
   const [isHit, setIsHit] = useState(false);
 
   function handleClick() {
     setIsHit(true);
     saveCoord([x, y]);
+    ship ? updateScore(100) : updateScore(-20);
   }
 
   return (

@@ -2,7 +2,10 @@ import styled from "@emotion/styled";
 import Coordinate from "./Coordinate";
 import { useEffect, useState } from "react";
 import Ship from "./Ship";
-import { ContentXSmall } from "./UI/Text";
+import { ContentRegular, ContentXSmall } from "./UI/Text";
+import { Input } from "./UI/Input";
+import { Button } from "./UI/Button";
+import { SaveIcon } from "./UI/Icon";
 
 const BoardContainer = styled.div`
   position: relative;
@@ -46,14 +49,38 @@ const BoardLocked = styled(BoardContainer)`
   width: calc(100% - 20px);
   height: calc(100% - 20px);
   background-color: #f6f6f9a1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  div {
+    display: flex;
+    flex-direction: column; 
+    width: 50%;
+    background-color: #f6f6f9c9;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+    color: #9595dd;
+
+    input {
+      width: 100%;
+    }
+  }
 `;
 
 const RowTitle = styled(ColumnTitle)`
 `;
 
-export function Board ({fleet, columns, rows, playTurn, turns, endGame, locked}) {
+export function Board ({fleet, columns, rows, playTurn, turns, endGame, locked, updateScore, score}) {
   const [moves, setMoves] = useState([]);
   const [shipsFound, setShipsFound] = useState([]);
+  const settings = localStorage.getItem("settings");
+  const [userName, setUserName] = useState(settings ? JSON.parse(settings).userName : "");
+  const [scoreSaved, setScoreSaved] = useState(false);
 
   useEffect(() => {
     if (shipsFound.length === fleet.length) {
@@ -77,6 +104,21 @@ export function Board ({fleet, columns, rows, playTurn, turns, endGame, locked})
     }
   }
 
+  function handleChangeName(e) {
+    e.preventDefault();
+    setUserName(e.target.value);
+  }
+
+  function handleSubmitScore(e) {
+    e.preventDefault();
+    if (userName.length > 0) {
+      let scores = JSON.parse(localStorage.getItem("scores"));
+      scores[userName] = score;
+      localStorage.setItem("scores", JSON.stringify(scores));
+      setScoreSaved(true);
+    }
+  }
+
   return (
     <BoardContainer locked={locked}>
       <Table>
@@ -93,6 +135,7 @@ export function Board ({fleet, columns, rows, playTurn, turns, endGame, locked})
                 fleet={fleet}
                 saveCoord={addMove}
                 ship={fleet.find(ship => ship.some(coord => coord[0] === row && coord[1] === column))}
+                updateScore={updateScore}
               />
             )}
           </>
@@ -111,7 +154,21 @@ export function Board ({fleet, columns, rows, playTurn, turns, endGame, locked})
           moves={moves}
           saveShip={saveShipFounded}
         />)}
-      {locked && <BoardLocked />}
+      {locked && 
+        <BoardLocked>
+          {!scoreSaved &&
+            <div>
+              <ContentRegular>Save score?</ContentRegular>
+              <ContentXSmall>Enter your name:</ContentXSmall>
+              <Input type="text" value={userName} onChange={handleChangeName} />
+              <Button onClick={handleSubmitScore}>
+                <SaveIcon />
+                <ContentRegular>SAVE</ContentRegular>
+              </Button>
+            </div>
+          }
+        </BoardLocked>
+      }
     </BoardContainer>
   )
 }

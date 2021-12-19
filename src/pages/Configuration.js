@@ -53,7 +53,7 @@ export default function Configuration () {
           <Button onClick={handleChangeTurns} value={50} name={"hard"}>Hard</Button>
         </ButtonContainer>
         <ContentRegular>Turns</ContentRegular>
-        <Input type="number" value={turns} onChange={handleChangeTurns} placeholder='infinite'/>
+        <Input type="number" value={turns} onChange={handleChangeTurns} placeholder='infinite' min="1"/>
         <ButtonContainer>
           <Link to="/battle">
             <Button>

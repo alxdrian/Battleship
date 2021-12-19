@@ -49,6 +49,7 @@ export const InfoContainer = styled(DefaultContainer)`
   color: #9595dd;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
+  gap: 10px;
 `;
 
 export const ButtonContainer = styled(DefaultContainer)`

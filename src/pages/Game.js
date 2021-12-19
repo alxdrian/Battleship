@@ -2,16 +2,17 @@ import styled from "@emotion/styled";
 import { Board } from "../components/Board";
 import { useState, useEffect } from "react";
 import { ButtonContainer, GameContainer, InfoContainer, PageContainer } from "../components/UI/Container";
-import { ContentLarge, ContentRegular, ContentSmall, ContentXLarge, Title } from "../components/UI/Text";
+import { ContentRegular, ContentSmall, ContentXLarge, Title } from "../components/UI/Text";
 import { Button, IconButton } from "../components/UI/Button";
 import { Link } from "react-router-dom";
-import { ConfigIcon, HomeIcon } from "../components/UI/Icon";
+import { ConfigIcon, HomeIcon, RestartIcon, StopIcon } from "../components/UI/Icon";
 export default function Game () {
   const [isPlaying, setIsPlaying] = useState(false);
   const [ships, setShips] = useState([]);
   const settings = JSON.parse(localStorage.getItem("settings"));
   const [turns, setTurns] = useState(settings.turns || 100);
   const [rePlay, setRePlay] = useState(false);
+  const [score, setScore] = useState(0);
   let usedCoordinates = {};
 
   const columns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -69,6 +70,19 @@ export default function Game () {
 
   function askReplay() {
     setRePlay(true);
+    switch(settings.difficulty) {
+      case "easy":
+        updateScore(turns * 10);
+        break;
+      case "medium":
+        updateScore(turns * 25);
+        break;
+      case "hard":
+        updateScore(turns * 50);
+        break;
+      default:
+        updateScore(turns * 10);
+    }
   }
 
   function endGame() {
@@ -77,10 +91,15 @@ export default function Game () {
     setShips([]);
     usedCoordinates = {};
     setTurns(settings.turns);
+    setScore(0);
   }
 
   function playTurn() {
     setTurns(turns - 1);
+  }
+
+  function updateScore(number) {
+    score + number < 0 ? setScore(0) : setScore(score + number);
   }
 
   return (
@@ -98,14 +117,15 @@ export default function Game () {
           </InfoContainer>
           <InfoContainer>
             <ContentRegular>Score</ContentRegular>
-            <ContentSmall>1000</ContentSmall>
+            <ContentSmall>{score}</ContentSmall>
           </InfoContainer>
           {isPlaying ? 
             <>
               {rePlay ?
                 <ButtonContainer>
                   <Button onClick={endGame}>
-                    <ContentSmall>TRY AGAIN</ContentSmall>
+                    <RestartIcon />
+                    <ContentSmall>RETRY</ContentSmall>
                   </Button>
                   <Link to="/">
                     <IconButton>
@@ -113,7 +133,10 @@ export default function Game () {
                     </IconButton>
                   </Link>
                 </ButtonContainer> :
-                <Button onClick={endGame}>I GIVE UP!</Button>
+                <Button onClick={endGame}>
+                  <StopIcon />
+                  <ContentSmall>I GIVE UP!</ContentSmall>
+                </Button>
               } 
             </>:
           <ButtonContainer>
@@ -140,6 +163,8 @@ export default function Game () {
             playTurn={playTurn}
             endGame={askReplay}
             locked={rePlay}
+            updateScore={updateScore}
+            score={score}
           />
           : 
           <Start onClick={createGame}><ContentXLarge>START</ContentXLarge></Start>

@@ -24,8 +24,12 @@ export default function Home () {
       localStorage.setItem("settings", JSON.stringify({
         turns: 100,
         difficulty: "easy",
-        username: "",
+        userName: "",
       }));
+    }
+    const scores = localStorage.getItem("scores");
+    if (!scores) {
+      localStorage.setItem("scores", JSON.stringify({}));
     }
   }, []);
 
