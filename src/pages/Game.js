@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Board } from "../components/Board";
 import { useState, useEffect } from "react";
-import { GameContainer, InfoContainer, PageContainer } from "../components/UI/Container";
+import { ButtonContainer, GameContainer, InfoContainer, PageContainer } from "../components/UI/Container";
 import { ContentLarge, ContentRegular, ContentSmall, ContentXLarge, Title } from "../components/UI/Text";
 import { Button, IconButton } from "../components/UI/Button";
 import { Link } from "react-router-dom";
@@ -103,7 +103,7 @@ export default function Game () {
           {isPlaying ? 
             <>
               {rePlay ?
-                <GameButtons>
+                <ButtonContainer>
                   <Button onClick={endGame}>
                     <ContentSmall>TRY AGAIN</ContentSmall>
                   </Button>
@@ -112,11 +112,11 @@ export default function Game () {
                       <HomeIcon />
                     </IconButton>
                   </Link>
-                </GameButtons> :
+                </ButtonContainer> :
                 <Button onClick={endGame}>I GIVE UP!</Button>
               } 
             </>:
-          <GameButtons>
+          <ButtonContainer>
             <Link to="/config">
               <Button>
                 <ConfigIcon />
@@ -128,7 +128,7 @@ export default function Game () {
                 <HomeIcon />
               </IconButton>
             </Link>
-          </GameButtons>
+          </ButtonContainer>
           }
         </GameStats>
         {isPlaying ?
@@ -166,10 +166,4 @@ const GameStats = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`;
-
-const GameButtons = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
 `;

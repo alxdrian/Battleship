@@ -18,6 +18,9 @@ export const GameContainer = styled.div`
   max-height: 85vh;
   overflow: scroll;
   position: relative;
+  ${props => props.orientation === "vertical" &&
+  `flex-direction: column;`
+  }
 
   &::-webkit-scrollbar {
     display: none;
@@ -46,4 +49,10 @@ export const InfoContainer = styled(DefaultContainer)`
   color: #9595dd;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
+`;
+
+export const ButtonContainer = styled(DefaultContainer)`
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
 `;

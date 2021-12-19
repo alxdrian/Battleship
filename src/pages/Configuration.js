@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ButtonContainer, GameContainer, InfoContainer, PageContainer } from '../components/UI/Container';
+import { ContentRegular, Title } from '../components/UI/Text';
+import { Button, IconButton } from '../components/UI/Button';
+import { Input } from '../components/UI/Input';
+import { HomeIcon, PlayIcon } from '../components/UI/Icon';
 
 export default function Configuration () {
   const [settings, setSettings] = useState(JSON.parse(localStorage.getItem('settings')) || {});
@@ -38,19 +43,31 @@ export default function Configuration () {
   }
 
   return (
-    <div>
-      <h1>Settings</h1>
-      <h2>Select Difficulty</h2>
-      <div>
-        <button onClick={handleChangeTurns} value={""} name={"easy"}>Easy</button>
-        <button onClick={handleChangeTurns} value={80} name={"medium"}>Medium</button>
-        <button onClick={handleChangeTurns} value={50} name={"hard"}>Hard</button>
-      </div>
-      <h2>Turns</h2>
-      <div>
-        <input type="number" value={turns} onChange={handleChangeTurns} placeholder='infinite'/>
-      </div>
-      <Link to="/battle">Go to</Link>
-    </div>
+    <PageContainer>
+      <GameContainer orientation={"vertical"}>
+        <Title>Settings</Title>
+        <ContentRegular>Select Difficulty</ContentRegular>
+        <ButtonContainer>
+          <Button onClick={handleChangeTurns} value={""} name={"easy"}>Easy</Button>
+          <Button onClick={handleChangeTurns} value={80} name={"medium"}>Medium</Button>
+          <Button onClick={handleChangeTurns} value={50} name={"hard"}>Hard</Button>
+        </ButtonContainer>
+        <ContentRegular>Turns</ContentRegular>
+        <Input type="number" value={turns} onChange={handleChangeTurns} placeholder='infinite'/>
+        <ButtonContainer>
+          <Link to="/battle">
+            <Button>
+              <PlayIcon />
+              <ContentRegular>BATTLE</ContentRegular>
+            </Button>
+          </Link>
+          <Link to="/">
+            <IconButton>
+              <HomeIcon />
+            </IconButton>
+          </Link>
+        </ButtonContainer>
+      </GameContainer>
+    </PageContainer>
   )
 }
