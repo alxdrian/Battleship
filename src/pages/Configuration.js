@@ -8,6 +8,7 @@ import { HomeIcon, PlayIcon } from '../components/UI/Icon';
 
 export default function Configuration () {
   const [settings, setSettings] = useState(JSON.parse(localStorage.getItem('settings')) || {});
+  const [userName, setUserName] = useState(settings.userName || '');
   const [turns, setTurns] = useState(settings.turns || 100);
 
   useEffect(() => {
@@ -42,6 +43,15 @@ export default function Configuration () {
     });
   }
 
+  function handleChangeUserName(e) {
+    e.preventDefault();
+    setUserName(e.target.value);
+    setSettings({
+      ...settings,
+      userName: e.target.value,
+    });
+  }
+
   return (
     <PageContainer>
       <GameContainer orientation={"vertical"}>
@@ -54,6 +64,8 @@ export default function Configuration () {
         </ButtonContainer>
         <ContentRegular>Turns</ContentRegular>
         <Input type="number" value={turns} onChange={handleChangeTurns} placeholder='infinite' min="1"/>
+        <ContentRegular>User</ContentRegular>
+        <Input type="text" value={userName} onChange={handleChangeUserName} placeholder='user name'/>
         <ButtonContainer>
           <Link to="/battle">
             <Button>

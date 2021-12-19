@@ -112,9 +112,11 @@ export function Board ({fleet, columns, rows, playTurn, turns, endGame, locked, 
   function handleSubmitScore(e) {
     e.preventDefault();
     if (userName.length > 0) {
-      let scores = JSON.parse(localStorage.getItem("scores"));
-      scores[userName] = score;
-      localStorage.setItem("scores", JSON.stringify(scores));
+      let scores = JSON.parse(localStorage.getItem("scores")).list;
+      scores.push([userName, score]);
+      localStorage.setItem("scores", JSON.stringify({
+        list: scores
+      }));
       setScoreSaved(true);
     }
   }

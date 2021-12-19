@@ -29,7 +29,9 @@ export default function Home () {
     }
     const scores = localStorage.getItem("scores");
     if (!scores) {
-      localStorage.setItem("scores", JSON.stringify({}));
+      localStorage.setItem("scores", JSON.stringify({
+        list: [],
+      }));
     }
   }, []);
 
