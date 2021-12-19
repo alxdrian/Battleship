@@ -2,10 +2,10 @@ import styled from "@emotion/styled";
 
 export const Button = styled.button`
   display: flex;
-  gap: 5px;
+  gap: 10px;
   padding: 5px 15px;
   height: 40px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border: none;
   border-radius: 20px;
@@ -24,13 +24,10 @@ export const Button = styled.button`
 export const IconButton = styled(Button)`
   width: 40px;
   height: 40px;
-  position: absolute;
+  position: absolute
+  align-items: center;
+  justify-content: center;
   padding: 0;
-
-  @media (max-width: 768px) {
-    height: 30px;
-    width: 30px;
-  }
 `;
 
 export const HomeButton = styled(IconButton)`

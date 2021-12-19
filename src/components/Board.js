@@ -37,12 +37,21 @@ const ColumnTitle = styled.div`
     width: 25px;
     height: 25px;
   }
-`; 
+`;
+
+const BoardLocked = styled(BoardContainer)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  background-color: #f6f6f9a1;
+`;
 
 const RowTitle = styled(ColumnTitle)`
 `;
 
-export function Board ({fleet, columns, rows, playTurn, turns, endGame}) {
+export function Board ({fleet, columns, rows, playTurn, turns, endGame, locked}) {
   const [moves, setMoves] = useState([]);
   const [shipsFound, setShipsFound] = useState([]);
 
@@ -69,7 +78,7 @@ export function Board ({fleet, columns, rows, playTurn, turns, endGame}) {
   }
 
   return (
-    <BoardContainer>
+    <BoardContainer locked={locked}>
       <Table>
         <div></div>
         {columns.map(column => <ColumnTitle key={`column-${column}`}><ContentXSmall>{column}</ContentXSmall></ColumnTitle>)}
@@ -102,6 +111,7 @@ export function Board ({fleet, columns, rows, playTurn, turns, endGame}) {
           moves={moves}
           saveShip={saveShipFounded}
         />)}
+      {locked && <BoardLocked />}
     </BoardContainer>
   )
 }
