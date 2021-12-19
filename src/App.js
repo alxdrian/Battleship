@@ -4,6 +4,7 @@ import background from "./assets/images/background.jpg";
 import Home from "./pages/Home";
 import Game from "./pages/Game";
 import Configuration from "./pages/Configuration";
+import Scores from "./pages/Scores";
 
 const cssGlobal = css`
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -38,6 +39,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/battle" element={<Game />} />
           <Route path="/config" element={<Configuration />} />
+          <Route path="/scores" element={<Scores />} />
         </Routes>
       </BrowserRouter>
     </main>
