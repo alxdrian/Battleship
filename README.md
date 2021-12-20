@@ -1,6 +1,16 @@
-# Getting Started with Create React App
+# Battleship
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## The application
+
+A web responsive application based on the famous game "Battleship". The user can play the game to find all the ships of the fleet, located on a 10 x 10 board. Also, the user can change the default configuration to play with different difficulties and change their name to save the score on the register.
+
+## Technologies
+
+Application created with ReactJS, emotion(styled-components) and react-router.
+
+## Execution
+
+You can execute the game by visiting https://battleship-alxdrian.herokuapp.com/ or running the following scripts (You will need yarn to install on your machine).
 
 ## Available Scripts
 
@@ -39,32 +49,4 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---- Created with ❤️ by Alecx Adrian De la Cruz Lopez ---
