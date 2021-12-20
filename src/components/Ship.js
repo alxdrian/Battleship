@@ -35,12 +35,13 @@ const ShipContainer = styled.div`
   align-items: center;
 `;
 
-const Armor = styled.div`
+export const Armor = styled.div`
   background-color: #f0863d;
   border-radius: 10px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  color: #aa2b46;
   ${props => props.orientation === "horizontal" ?
   `
     width: 20px;
@@ -58,6 +59,8 @@ const Armor = styled.div`
     @media (max-width: 540px) {
       height: 12px;
       width: ${props.length * 22}px;
+      line-height: 14px;
+      font-size: 12px;
     }
   `}
   flex-wrap: wrap;

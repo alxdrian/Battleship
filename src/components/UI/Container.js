@@ -30,6 +30,7 @@ export const GameContainer = styled.div`
   @media (max-width: 768px) {
     width: 80%;
     flex-direction: column;
+    gap: 10px;
   }
 `;
 

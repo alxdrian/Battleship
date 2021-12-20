@@ -6,6 +6,8 @@ import { ContentRegular, ContentSmall, ContentXLarge, Title } from "../component
 import { Button, IconButton } from "../components/UI/Button";
 import { Link } from "react-router-dom";
 import { ConfigIcon, HomeIcon, RestartIcon, StopIcon } from "../components/UI/Icon";
+import { Armor } from "../components/Ship";
+
 export default function Game () {
   const [isPlaying, setIsPlaying] = useState(false);
   const [ships, setShips] = useState([]);
@@ -13,6 +15,12 @@ export default function Game () {
   const [turns, setTurns] = useState(settings.turns || 100);
   const [rePlay, setRePlay] = useState(false);
   const [score, setScore] = useState(0);
+  const [shipsToFind, setShipsToFind] = useState({
+    4: 1,
+    3: 2,
+    2: 3,
+    1: 4,
+  });
   let usedCoordinates = {};
 
   const columns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -92,6 +100,12 @@ export default function Game () {
     usedCoordinates = {};
     setTurns(settings.turns);
     setScore(0);
+    setShipsToFind({
+      4: 1,
+      3: 2,
+      2: 3,
+      1: 4,
+    });
   }
 
   function playTurn() {
@@ -118,6 +132,12 @@ export default function Game () {
           <InfoContainer>
             <ContentRegular>Score</ContentRegular>
             <ContentSmall>{score}</ContentSmall>
+          </InfoContainer>
+          <InfoContainer>
+            <Armor length={1}>{shipsToFind[1] ? shipsToFind[1] : 0}</Armor>
+            <Armor length={2}><div></div>{shipsToFind[2] ? shipsToFind[2] : 0}<div></div></Armor>
+            <Armor length={3}><div></div>{shipsToFind[3] ? shipsToFind[3] : 0}<div></div></Armor>
+            <Armor length={4}><div></div>{shipsToFind[4] ? shipsToFind[4] : 0}<div></div></Armor>
           </InfoContainer>
           {isPlaying ? 
             <>
@@ -165,6 +185,7 @@ export default function Game () {
             locked={rePlay}
             updateScore={updateScore}
             score={score}
+            shipsToFind={setShipsToFind}
           />
           : 
           <Start onClick={createGame}><ContentXLarge>START</ContentXLarge></Start>

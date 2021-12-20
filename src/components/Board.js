@@ -69,21 +69,35 @@ const BoardLocked = styled(BoardContainer)`
     input {
       width: 100%;
     }
+
+    @media (max-width: 540px) {
+      width: 75%;
+    }
   }
 `;
 
 const RowTitle = styled(ColumnTitle)`
 `;
 
-export function Board ({fleet, columns, rows, playTurn, turns, endGame, locked, updateScore, score}) {
+export function Board ({fleet, columns, rows, playTurn, turns, endGame, locked, updateScore, score, shipsToFind}) {
   const [moves, setMoves] = useState([]);
   const [shipsFound, setShipsFound] = useState([]);
   const settings = localStorage.getItem("settings");
   const [userName, setUserName] = useState(settings ? JSON.parse(settings).userName : "");
   const [scoreSaved, setScoreSaved] = useState(false);
-  const [winner, setWinner] = useState(false);
+  const [winner, setWinner] = useState("");
 
   useEffect(() => {
+    const restShips = fleet.filter(ship => !shipsFound.includes(ship));
+    const counter = {};
+    restShips.forEach(ship => {
+      if (counter[ship.length]) {
+        counter[ship.length]++;
+      } else {
+        counter[ship.length] = 1;
+      }
+    });
+    shipsToFind(counter);
     if (shipsFound.length === fleet.length) {
       setWinner(true);
       endGame();
@@ -161,7 +175,7 @@ export function Board ({fleet, columns, rows, playTurn, turns, endGame, locked, 
         <BoardLocked>
           {!scoreSaved &&
             <div>
-              <ContentXLarge>YOU {winner ? "WIN" : "LOSE"} !!</ContentXLarge>
+              <ContentXLarge>YOU {winner ? "WIN" : "LOSE"} !</ContentXLarge>
               <ContentRegular>Save score?</ContentRegular>
               <ContentXSmall>Enter your name:</ContentXSmall>
               <Input type="text" value={userName} onChange={handleChangeName} />

@@ -19,6 +19,15 @@ export const Button = styled.button`
     width: 30px;
     height: 30px;
   }
+
+  @media (max-width: 768px) {
+    padding: 2.5px 10px;
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
 `;
 
 export const IconButton = styled(Button)`

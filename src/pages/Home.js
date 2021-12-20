@@ -15,6 +15,10 @@ const LinkContainer = styled(DefaultContainer)`
   a {
     width: 100%;
   }
+
+  @media (max-width: 540px) {
+    gap: 10px;
+  }
 `;
 
 export default function Home () {
