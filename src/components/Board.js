@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Coordinate from "./Coordinate";
 import { useEffect, useState } from "react";
 import Ship from "./Ship";
-import { ContentRegular, ContentXSmall } from "./UI/Text";
+import { ContentXLarge, ContentRegular, ContentXSmall } from "./UI/Text";
 import { Input } from "./UI/Input";
 import { Button } from "./UI/Button";
 import { SaveIcon } from "./UI/Icon";
@@ -81,10 +81,11 @@ export function Board ({fleet, columns, rows, playTurn, turns, endGame, locked, 
   const settings = localStorage.getItem("settings");
   const [userName, setUserName] = useState(settings ? JSON.parse(settings).userName : "");
   const [scoreSaved, setScoreSaved] = useState(false);
+  const [winner, setWinner] = useState(false);
 
   useEffect(() => {
     if (shipsFound.length === fleet.length) {
-      console.log("You win!");
+      setWinner(true);
       endGame();
     }
     if (turns === 0) {
@@ -160,6 +161,7 @@ export function Board ({fleet, columns, rows, playTurn, turns, endGame, locked, 
         <BoardLocked>
           {!scoreSaved &&
             <div>
+              <ContentXLarge>YOU {winner ? "WIN" : "LOSE"} !!</ContentXLarge>
               <ContentRegular>Save score?</ContentRegular>
               <ContentXSmall>Enter your name:</ContentXSmall>
               <Input type="text" value={userName} onChange={handleChangeName} />
