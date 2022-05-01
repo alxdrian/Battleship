@@ -34,7 +34,7 @@ function App() {
   return (
     <main>
       <Global styles={cssGlobal}/>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/battle" element={<Game />} />
