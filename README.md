@@ -10,7 +10,7 @@ Application created with ReactJS, emotion(styled-components) and react-router.
 
 ## Execution
 
-You can execute the game by visiting https://battleship-alxdrian.herokuapp.com/ or running the following scripts (You will need yarn to install on your machine).
+You can execute the game by visiting https://alxdrian.github.io/Battleship/ or running the following scripts (You will need yarn to install on your machine).
 
 ## Available Scripts
 
