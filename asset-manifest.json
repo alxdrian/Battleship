@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/static/js/main.eefb648f.js",
-    "static/js/787.28b468f3.chunk.js": "/static/js/787.28b468f3.chunk.js",
-    "static/media/background.jpg": "/static/media/background.bad8f08c325bb4566c5e.jpg",
-    "index.html": "/index.html",
-    "main.eefb648f.js.map": "/static/js/main.eefb648f.js.map",
-    "787.28b468f3.chunk.js.map": "/static/js/787.28b468f3.chunk.js.map"
+    "main.js": "/Battleship/static/js/main.5754afed.js",
+    "static/js/787.28b468f3.chunk.js": "/Battleship/static/js/787.28b468f3.chunk.js",
+    "static/media/background.jpg": "/Battleship/static/media/background.bad8f08c325bb4566c5e.jpg",
+    "index.html": "/Battleship/index.html",
+    "main.5754afed.js.map": "/Battleship/static/js/main.5754afed.js.map",
+    "787.28b468f3.chunk.js.map": "/Battleship/static/js/787.28b468f3.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.eefb648f.js"
+    "static/js/main.5754afed.js"
   ]
 }
